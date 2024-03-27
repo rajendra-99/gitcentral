@@ -53,9 +53,9 @@ jobs:
           sca_username: ${{ secrets.CHECKMARX_SCA_USERNAME }} # To be stored in GitHub Secrets.
           sca_password: ${{ secrets.CHECKMARX_SCA_PASSWORD }} # To be stored in GitHub Secrets.
           break_build: false
-          scanners: sast,sca
+          scanners: sca
     # Additional CLI parameters
           #params: # optional, default is 
     # GitHub API Token-change- made changes to runner, added wsl 2,fix docker: Got permission denied , inbound/outbound allowed
           github_token: ${{ github.token }}    
-          params: --bug-tracker=Sarif --checkmarx.version=9.6  --logging.level.com.checkmarx.flow.service=DEBUG --cx-flow.sca.sca-enable-sca-resolver = true    
+          params: --bug-tracker=Sarif --checkmarx.version=9.6  --logging.level.com.checkmarx.flow.service=DEBUG --sca.enable-sca-resolver=true   
