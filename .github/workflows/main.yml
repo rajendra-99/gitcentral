@@ -46,6 +46,14 @@ jobs:
           bug_tracker: Sarif
     # Incremental Scans?
           incremental:  false
+          sca_api_url: https://eu.api-sca.checkmarx.net
+          sca_app_url: https://eu.sca.checkmarx.net
+          sca_access_control_url: https://eu.platform.checkmarx.net
+          sca_tenant: "EU-Support" # <-- Insert Checkmarx CxSCA Tenant
+          sca_username: ${{ secrets.CHECKMARX_SCA_USERNAME }} # To be stored in GitHub Secrets.
+          sca_password: ${{ secrets.CHECKMARX_SCA_PASSWORD }} # To be stored in GitHub Secrets.
+          break_build: false
+          scanners: sca
     # Additional CLI parameters
           #params: # optional, default is 
     # GitHub API Token-change- made changes to runner, added wsl 2,fix docker: Got permission denied , inbound/outbound allowed
