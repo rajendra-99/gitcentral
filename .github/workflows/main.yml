@@ -1,0 +1,53 @@
+name: CxFlow
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: self-hosted
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - name: Checkmarx CxFlow Action
+      # You may pin to the exact commit or the version.
+      # uses: checkmarx-ts/checkmarx-cxflow-github-action@9c07e2adcb17d0fdf60f3184ff53720513ea3c09
+        uses: checkmarx-ts/checkmarx-cxflow-github-action@v1.9
+        env:
+            CHECKMARX_CLIENT_ID : "resource_owner_sast_client"
+            CHECKMARX_SCOPE : "access_control_api sast_api"
+        with:
+    # Provide Checkmarx URL
+          checkmarx_url: http://192.168.1.35:80
+    # Select a Checkmarx Team
+          team: "CxServer/CxFlow"
+    # Provide Checkmarx Username
+          checkmarx_username: admin
+    # Provide Checkmarx Password
+          checkmarx_password: Welcome12$
+    # Provide Checkmarx Client Secret
+          checkmarx_client_secret: 014DF517-39D1-4453-B7B3-9930C563627C
+    # Select a Checkmarx Project
+          project: test_new_proj
+    # Select an Application Name used by downstream bug tracker systems
+          app: APPSEC
+    # Select a Checkmarx Preset
+          #preset: High and Medium
+    # Break build based on Checkmarx findings?
+          #break_build: # optional
+    # Bug tracker for the scan results.
+          bug_tracker: Sarif
+    # Incremental Scans?
+          incremental:  false
+    # Additional CLI parameters
+          #params: # optional, default is 
+    # GitHub API Token-change- made changes to runner, added wsl 2,fix docker: Got permission denied , inbound/outbound allowed
+          github_token: ${{ github.token }}    
+          params: --bug-tracker=Sarif --checkmarx.version=9.6  --logging.level.com.checkmarx.flow.service=DEBUG    
